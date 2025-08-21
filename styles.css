@@ -41,6 +41,10 @@ body {
     background: linear-gradient(135deg, #27ae60, #2ecc71);
 }
 
+.Lija-de-Agua-bg {
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+}
+
 .floating-icon {
     animation: float 3s ease-in-out infinite;
 }
