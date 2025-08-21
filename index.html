@@ -6,6 +6,7 @@
     <title>Catálogo de Productos - Ferreinox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- Agrega Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Agrega Papa Parse para leer CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -42,6 +43,10 @@
                         <i class="fas fa-paint-roller mr-1"></i> Pinturas
                     </button>
                     <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('Abrasivos')">
+                        <i class="fas fa-file-alt mr-1"></i> Abrasivos
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
                             onclick="filterProducts('herramientas')">
                         <i class="fas fa-tools mr-1"></i> Herramientas
                     </button>
@@ -62,6 +67,10 @@
                     <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
                             onclick="filterProducts('pinturas')">
                         <i class="fas fa-paint-roller mr-1"></i> Pinturas
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('Abrasivos')">
+                        <i class="fas fa-file-alt mr-1"></i> Abrasivos
                     </button>
                     <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
                             onclick="filterProducts('herramientas')">
@@ -121,6 +130,10 @@
                     
                     // Almacenar todos los productos
                     allProducts = results.data;
+                    
+                    // Mostrar información de depuración en la consola
+                    console.log("Productos cargados:", allProducts);
+                    console.log("Número total de productos:", allProducts.length);
                     
                     // Mostrar todos los productos inicialmente
                     displayProducts(allProducts);
@@ -192,12 +205,15 @@
                         <div class="p-6 flex flex-col md:flex-row">
                             <!-- Columna izquierda: Imagen y clasificación -->
                             <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-                                <div class="category-tag ${subcategory}-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">
+                                <div class="category-tag ${subcategory.replace(/\s+/g, '-')}-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">
                                     ${getProductLevel(product.nombre)}
                                 </div>
-                                <img src="images/productos/${product.subcategoria}/${product.imagen}" 
-                                     alt="${product.nombre}" 
-                                     class="w-auto max-h-72 object-contain product-shadow">
+                                <div class="h-64 w-64 flex items-center justify-center">
+                                    <img src="images/productos/${product.subcategoria}/${product.imagen}" 
+                                        alt="${product.nombre}" 
+                                        class="w-auto max-h-64 object-contain product-shadow"
+                                        onerror="this.src='https://via.placeholder.com/300x300?text=Imagen+Pendiente'">
+                                </div>
                                 <div class="rating mt-4 text-amber-400 flex">
                                     ${getRatingStars(product.nombre)}
                                 </div>
@@ -291,9 +307,10 @@
                 'pintulux': 'cyan',
                 'herramientas': 'yellow',
                 'accesorios': 'green',
+                'Lija de Agua': 'blue',
                 'default': 'blue'
             };
-            return colors[subcategory.toLowerCase()] || colors.default;
+            return colors[subcategory] || colors.default;
         }
 
         function getCategoryIcon(subcategory) {
@@ -303,9 +320,10 @@
                 'pintulux': '💎',
                 'herramientas': '🔧',
                 'accesorios': '🧰',
+                'Lija de Agua': '📄',
                 'default': '📦'
             };
-            return icons[subcategory.toLowerCase()] || icons.default;
+            return icons[subcategory] || icons.default;
         }
 
         function getCategoryDescription(subcategory) {
@@ -315,9 +333,10 @@
                 'pintulux': 'Pintura de lujo con acabado premium',
                 'herramientas': 'Herramientas profesionales para todo tipo de trabajos',
                 'accesorios': 'Complementos y accesorios para pintura',
+                'Lija de Agua': 'Abrasivos impermeables para acabados perfectos',
                 'default': 'Productos de calidad para tus proyectos'
             };
-            return descriptions[subcategory.toLowerCase()] || descriptions.default;
+            return descriptions[subcategory] || descriptions.default;
         }
 
         function getProductLevel(productName) {
@@ -328,6 +347,8 @@
                 return 'PROFESIONAL';
             } else if (productName.includes('Industrial')) {
                 return 'INDUSTRIAL';
+            } else if (productName.includes('ABRACOL')) {
+                return 'PROFESIONAL';
             }
             return 'ESTÁNDAR';
         }
@@ -337,7 +358,7 @@
             let stars = '';
             let rating = 0;
             
-            if (productName.includes('Advanced') || productName.includes('Premium')) {
+            if (productName.includes('Advanced') || productName.includes('Premium') || productName.includes('ABRACOL')) {
                 rating = 5;
             } else if (productName.includes('Pro')) {
                 rating = 4;
