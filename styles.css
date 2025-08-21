@@ -33,6 +33,14 @@ body {
     background: linear-gradient(135deg, #00d2d3, #54a0ff);
 }
 
+.herramientas-bg {
+    background: linear-gradient(135deg, #f1c40f, #e67e22);
+}
+
+.accesorios-bg {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
 .floating-icon {
     animation: float 3s ease-in-out infinite;
 }
@@ -98,6 +106,12 @@ tbody tr {
 
 .rating:hover {
     transform: scale(1.1);
+}
+
+/* Menú de navegación */
+nav button.active {
+    background-color: rgba(126, 87, 194, 0.8);
+    font-weight: 600;
 }
 
 /* Mejoras para responsive */
