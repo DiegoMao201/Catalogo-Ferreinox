@@ -48,3 +48,66 @@ body {
     margin: 3rem 0;
     opacity: 0.3;
 }
+
+/* Nuevos estilos para el diseño de catálogo técnico */
+.category-tag {
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-shadow {
+    filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.1));
+    transition: all 0.5s ease;
+}
+
+.bg-white:hover .product-shadow {
+    transform: scale(1.05);
+}
+
+/* Animación para las tablas */
+table {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+table:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las filas de la tabla */
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+/* Animación para etiquetas de características */
+.flex-wrap span {
+    transition: all 0.3s ease;
+}
+
+.flex-wrap span:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para el rating con estrellas */
+.rating {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.rating:hover {
+    transform: scale(1.1);
+}
+
+/* Mejoras para responsive */
+@media (max-width: 768px) {
+    .overflow-x-auto {
+        margin: 0 -16px;
+        padding: 0 16px;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+}
