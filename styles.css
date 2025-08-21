@@ -1,1 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.product-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.viniltex-bg {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}
+
+.koraza-bg {
+    background: linear-gradient(135deg, #4834d4, #686de0);
+}
+
+.pintulux-bg {
+    background: linear-gradient(135deg, #00d2d3, #54a0ff);
+}
+
+.floating-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.section-divider {
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, white, transparent);
+    margin: 3rem 0;
+    opacity: 0.3;
+}
