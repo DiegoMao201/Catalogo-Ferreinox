@@ -6,6 +6,8 @@
     <title>Catálogo de Productos - Ferreinox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- Agregar Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
@@ -25,7 +27,7 @@
 
     <div class="max-w-7xl mx-auto px-4 pb-12">
         
-        <!-- VINILTEX Section -->
+        <!-- Nuevo formato de catálogo técnico para VINILTEX -->
         <div class="mb-16">
             <div class="text-center mb-8">
                 <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
@@ -35,57 +37,142 @@
                 <p class="text-white text-lg opacity-80">Pintura vinílica de alta calidad para interiores</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Viniltex 1/4 Galón -->
-                <div class="product-card">
-                    <div class="viniltex-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1/4</span>
+            <!-- Producto técnico con tabla de especificaciones -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
+                <div class="p-6 flex flex-col md:flex-row">
+                    <!-- Columna izquierda: Imagen y clasificación -->
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+                        <div class="category-tag viniltex-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">PREMIUM</div>
+                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Viniltex Advanced Mate" class="w-auto max-h-72 object-contain product-shadow">
+                        <div class="rating mt-4 text-amber-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Viniltex 1/4 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">946 ml</div>
-                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 8-10 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Ideal para espacios pequeños y retoques</p>
-                    <div class="text-center">
-                        <div class="viniltex-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Presentación Compacta
+                    
+                    <!-- Columna derecha: Descripción y especificaciones -->
+                    <div class="md:w-2/3 md:pl-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">VINILTEX ADVANCED MATE</h3>
+                        <p class="text-gray-600 mb-6">
+                            Pintura vinil-acrílica de alta calidad con tecnología avanzada. Ofrece excelente cubrimiento, 
+                            lavabilidad y resistencia. Su acabado mate proporciona una apariencia sofisticada 
+                            con bajo brillo que disimula imperfecciones. Ideal para espacios interiores como 
+                            salas, habitaciones y áreas comunes.
+                        </p>
+                        
+                        <!-- Tabla de especificaciones técnicas -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
+                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
+                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
+                                        <th class="py-2 px-4 border-b">ACABADO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10411274</td>
+                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
+                                        <td class="py-2 px-4 border-b border-r">8-10 m²</td>
+                                        <td class="py-2 px-4 border-b">Mate</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10411273</td>
+                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">35-40 m²</td>
+                                        <td class="py-2 px-4 border-b">Mate</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10411272</td>
+                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">175-200 m²</td>
+                                        <td class="py-2 px-4 border-b">Mate</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Características adicionales -->
+                        <div class="flex flex-wrap gap-2 mt-6">
+                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Bajo olor</span>
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Lavable</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Ecológica</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Secado rápido</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Viniltex 1 Galón -->
-                <div class="product-card">
-                    <div class="viniltex-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Viniltex 1 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">3.78 L</div>
-                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 35-40 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Perfecto para habitaciones completas</p>
-                    <div class="text-center">
-                        <div class="viniltex-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Más Popular
+            <!-- Puedes agregar más productos con el mismo formato -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
+                <div class="p-6 flex flex-col md:flex-row">
+                    <!-- Columna izquierda -->
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+                        <div class="category-tag viniltex-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">PROFESIONAL</div>
+                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Viniltex Satinado" class="w-auto max-h-72 object-contain product-shadow">
+                        <div class="rating mt-4 text-amber-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
                         </div>
                     </div>
-                </div>
-
-                <!-- Viniltex 5 Galones -->
-                <div class="product-card">
-                    <div class="viniltex-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">5G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Viniltex 5 Galones</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">18.9 L</div>
-                        <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 175-200 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Ideal para proyectos grandes</p>
-                    <div class="text-center">
-                        <div class="viniltex-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Mejor Precio
+                    
+                    <!-- Columna derecha -->
+                    <div class="md:w-2/3 md:pl-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">VINILTEX SATINADO</h3>
+                        <p class="text-gray-600 mb-6">
+                            Pintura vinil-acrílica con acabado satinado que proporciona un sutil brillo y elegancia. 
+                            Ofrece excelente resistencia a manchas y lavabilidad superior. Ideal para espacios 
+                            que requieren limpieza frecuente como cocinas, pasillos y áreas de alto tráfico.
+                        </p>
+                        
+                        <!-- Tabla de especificaciones técnicas -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
+                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
+                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
+                                        <th class="py-2 px-4 border-b">ACABADO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10521354</td>
+                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
+                                        <td class="py-2 px-4 border-b border-r">8-10 m²</td>
+                                        <td class="py-2 px-4 border-b">Satinado</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10521355</td>
+                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">32-38 m²</td>
+                                        <td class="py-2 px-4 border-b">Satinado</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">10521356</td>
+                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">160-190 m²</td>
+                                        <td class="py-2 px-4 border-b">Satinado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Características adicionales -->
+                        <div class="flex flex-wrap gap-2 mt-6">
+                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Alta resistencia</span>
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Anti-manchas</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Bajo VOC</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Fácil aplicación</span>
                         </div>
                     </div>
                 </div>
@@ -95,7 +182,7 @@
         <!-- Separador -->
         <div class="h-0.5 bg-gradient-to-r from-transparent via-white to-transparent my-12 opacity-30"></div>
 
-        <!-- KORAZA Section -->
+        <!-- KORAZA Section - también con el nuevo formato -->
         <div class="mb-16">
             <div class="text-center mb-8">
                 <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
@@ -105,132 +192,79 @@
                 <p class="text-white text-lg opacity-80">Pintura anticorrosiva de máxima protección</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Koraza 1/4 Galón -->
-                <div class="product-card">
-                    <div class="koraza-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1/4</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Koraza 1/4 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">946 ml</div>
-                        <div class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 6-8 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Para trabajos de detalle y mantenimiento</p>
-                    <div class="text-center">
-                        <div class="koraza-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Protección Compacta
+            <!-- Producto con especificaciones técnicas -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
+                <div class="p-6 flex flex-col md:flex-row">
+                    <!-- Columna izquierda -->
+                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+                        <div class="category-tag koraza-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">INDUSTRIAL</div>
+                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Koraza Exteriores" class="w-auto max-h-72 object-contain product-shadow">
+                        <div class="rating mt-4 text-amber-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                     </div>
-                </div>
-
-                <!-- Koraza 1 Galón -->
-                <div class="product-card">
-                    <div class="koraza-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Koraza 1 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">3.78 L</div>
-                        <div class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 25-30 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Cobertura estándar para estructuras metálicas</p>
-                    <div class="text-center">
-                        <div class="koraza-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Uso Industrial
+                    
+                    <!-- Columna derecha -->
+                    <div class="md:w-2/3 md:pl-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">KORAZA EXTERIOR</h3>
+                        <p class="text-gray-600 mb-6">
+                            Pintura acrílica 100% para exteriores con protección avanzada contra rayos UV, 
+                            lluvia y condiciones climáticas extremas. Su formulación ofrece máxima durabilidad, 
+                            impermeabilidad y resistencia a hongos y algas. Ideal para fachadas, muros exteriores 
+                            y superficies expuestas a la intemperie.
+                        </p>
+                        
+                        <!-- Tabla de especificaciones técnicas -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-200">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
+                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
+                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
+                                        <th class="py-2 px-4 border-b">DURACIÓN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">23567891</td>
+                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
+                                        <td class="py-2 px-4 border-b border-r">6-8 m²</td>
+                                        <td class="py-2 px-4 border-b">5 años</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">23567892</td>
+                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">25-30 m²</td>
+                                        <td class="py-2 px-4 border-b">5 años</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-2 px-4 border-b border-r">23567893</td>
+                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
+                                        <td class="py-2 px-4 border-b border-r">125-150 m²</td>
+                                        <td class="py-2 px-4 border-b">5 años</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Koraza 5 Galones -->
-                <div class="product-card">
-                    <div class="koraza-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">5G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Koraza 5 Galones</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">18.9 L</div>
-                        <div class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 125-150 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Para grandes proyectos industriales</p>
-                    <div class="text-center">
-                        <div class="koraza-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Máxima Protección
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Separador -->
-        <div class="h-0.5 bg-gradient-to-r from-transparent via-white to-transparent my-12 opacity-30"></div>
-
-        <!-- PINTULUX Section -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
-                    <span class="text-cyan-400 mr-4">💎</span>
-                    PINTULUX
-                </h2>
-                <p class="text-white text-lg opacity-80">Pintura de lujo con acabado premium</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Pintulux 1/4 Galón -->
-                <div class="product-card">
-                    <div class="pintulux-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1/4</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Pintulux 1/4 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">946 ml</div>
-                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 10-12 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Acabado premium para espacios especiales</p>
-                    <div class="text-center">
-                        <div class="pintulux-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Calidad Premium
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pintulux 1 Galón -->
-                <div class="product-card">
-                    <div class="pintulux-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">1G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Pintulux 1 Galón</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">3.78 L</div>
-                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 40-45 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Elegancia y durabilidad en cada aplicación</p>
-                    <div class="text-center">
-                        <div class="pintulux-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Acabado Luxury
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pintulux 5 Galones -->
-                <div class="product-card">
-                    <div class="pintulux-bg rounded-full w-16 h-16 flex items-center justify-center mb-4 mx-auto">
-                        <span class="text-white text-2xl font-bold">5G</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3 text-center">Pintulux 5 Galones</h3>
-                    <div class="space-y-2 mb-4 text-center">
-                        <div class="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-sm font-medium inline-block mr-2">18.9 L</div>
-                        <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium inline-block">Rendimiento: 200-225 m²</div>
-                    </div>
-                    <p class="text-gray-600 text-center mb-4">Para proyectos de alta gama</p>
-                    <div class="text-center">
-                        <div class="pintulux-bg text-white px-4 py-2 rounded-lg font-semibold inline-block">
-                            Máximo Lujo
+                        
+                        <!-- Características adicionales -->
+                        <div class="flex flex-wrap gap-2 mt-6">
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Anti-hongos</span>
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Protección UV</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Impermeable</span>
+                            <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium">Máxima durabilidad</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Puedes continuar añadiendo las demás secciones con el mismo formato -->
 
         <!-- Footer -->
         <div class="text-center py-8 border-t border-white border-opacity-20">
