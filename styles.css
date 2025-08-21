@@ -21,29 +21,35 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-.viniltex-bg {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-}
+/* --- ESTILOS DE CATEGORÍA --- */
+.viniltex-bg { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+.koraza-bg { background: linear-gradient(135deg, #4834d4, #686de0); }
+.pintulux-bg { background: linear-gradient(135deg, #00d2d3, #54a0ff); }
+.herramientas-bg { background: linear-gradient(135deg, #f1c40f, #e67e22); }
+.accesorios-bg { background: linear-gradient(135deg, #27ae60, #2ecc71); }
 
-.koraza-bg {
-    background: linear-gradient(135deg, #4834d4, #686de0);
-}
+/* --- NUEVOS ESTILOS PARA ABRASIVOS --- */
+.Lija-de-Agua-bg { background: linear-gradient(135deg, #3498db, #2c3e50); }
+.Lija-Omega-bg { background: linear-gradient(135deg, #e67e22, #d35400); }
+.Lija-Roja-bg { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+.Disco-Velcro-bg { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+.Tela-Esmeril-bg { background: linear-gradient(135deg, #34495e, #2c3e50); }
+.Disco-de-Corte-bg { background: linear-gradient(135deg, #f39c12, #d68910); }
+.Disco-de-Pulir-bg { background: linear-gradient(135deg, #1abc9c, #16a085); }
+.Disco-Flap-bg { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+.Disco-Flap-Ceramico-bg { background: linear-gradient(135deg, #d35400, #a04000); }
+.Fibro-Disco-bg { background: linear-gradient(135deg, #c0392b, #a93226); }
+.Cono-bg { background: linear-gradient(135deg, #7f8c8d, #95a5a6); }
+.Copa-bg { background: linear-gradient(135deg, #bdc3c7, #a1a9ad); }
+.Afilador-bg { background: linear-gradient(135deg, #16a085, #117864); }
+.Bloque-Afilador-bg { background: linear-gradient(135deg, #27ae60, #229954); }
+.Disco-Segmentado-bg { background: linear-gradient(135deg, #f1c40f, #b7950b); }
+.Disco-Turbo-bg { background: linear-gradient(135deg, #e67e22, #af601a); }
+.Disco-Continuo-bg { background: linear-gradient(135deg, #3498db, #21618c); }
+.Cinta-Antideslizante-bg { background: linear-gradient(135deg, #2c3e50, #17202a); }
+.Cinta-de-Enmascarar-bg { background: linear-gradient(135deg, #f5b041, #f39c12); }
+.Cinta-de-Empaque-bg { background: linear-gradient(135deg, #5dade2, #3498db); }
 
-.pintulux-bg {
-    background: linear-gradient(135deg, #00d2d3, #54a0ff);
-}
-
-.herramientas-bg {
-    background: linear-gradient(135deg, #f1c40f, #e67e22);
-}
-
-.accesorios-bg {
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
-}
-
-.Lija-de-Agua-bg {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
-}
 
 .floating-icon {
     animation: float 3s ease-in-out infinite;
