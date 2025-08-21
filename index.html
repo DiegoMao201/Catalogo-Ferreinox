@@ -6,8 +6,9 @@
     <title>Catálogo de Productos - Ferreinox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
-    <!-- Agregar Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Agrega Papa Parse para leer CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -25,247 +26,67 @@
         <div class="mt-6 w-32 h-1 bg-white mx-auto rounded-full opacity-60"></div>
     </header>
 
-    <div class="max-w-7xl mx-auto px-4 pb-12">
+    <!-- Menú de Categorías -->
+    <div class="sticky top-0 z-50 bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-900 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <nav class="flex items-center justify-between h-16">
+                <div class="flex">
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600 active" 
+                            onclick="filterProducts('todos')">
+                        Todos los Productos
+                    </button>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('pinturas')">
+                        <i class="fas fa-paint-roller mr-1"></i> Pinturas
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('herramientas')">
+                        <i class="fas fa-tools mr-1"></i> Herramientas
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('accesorios')">
+                        <i class="fas fa-brush mr-1"></i> Accesorios
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </nav>
+            <!-- Menú móvil -->
+            <div id="mobileMenu" class="hidden pb-3">
+                <div class="flex flex-col space-y-2">
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('pinturas')">
+                        <i class="fas fa-paint-roller mr-1"></i> Pinturas
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('herramientas')">
+                        <i class="fas fa-tools mr-1"></i> Herramientas
+                    </button>
+                    <button class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600" 
+                            onclick="filterProducts('accesorios')">
+                        <i class="fas fa-brush mr-1"></i> Accesorios
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="max-w-7xl mx-auto px-4 py-6 pb-12">
+        <!-- Contenedor de productos dinámicos -->
+        <div id="productsContainer" class="mb-16">
+            <!-- Los productos se cargarán aquí desde el CSV -->
+            <div class="text-white text-center py-10">
+                <i class="fas fa-spinner fa-spin text-4xl"></i>
+                <p class="mt-4">Cargando productos...</p>
+            </div>
+        </div>
         
-        <!-- Nuevo formato de catálogo técnico para VINILTEX -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
-                    <span class="text-red-400 mr-4">🎨</span>
-                    VINILTEX
-                </h2>
-                <p class="text-white text-lg opacity-80">Pintura vinílica de alta calidad para interiores</p>
-            </div>
-            
-            <!-- Producto técnico con tabla de especificaciones -->
-            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
-                <div class="p-6 flex flex-col md:flex-row">
-                    <!-- Columna izquierda: Imagen y clasificación -->
-                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-                        <div class="category-tag viniltex-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">PREMIUM</div>
-                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Viniltex Advanced Mate" class="w-auto max-h-72 object-contain product-shadow">
-                        <div class="rating mt-4 text-amber-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Columna derecha: Descripción y especificaciones -->
-                    <div class="md:w-2/3 md:pl-8">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">VINILTEX ADVANCED MATE</h3>
-                        <p class="text-gray-600 mb-6">
-                            Pintura vinil-acrílica de alta calidad con tecnología avanzada. Ofrece excelente cubrimiento, 
-                            lavabilidad y resistencia. Su acabado mate proporciona una apariencia sofisticada 
-                            con bajo brillo que disimula imperfecciones. Ideal para espacios interiores como 
-                            salas, habitaciones y áreas comunes.
-                        </p>
-                        
-                        <!-- Tabla de especificaciones técnicas -->
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
-                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
-                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
-                                        <th class="py-2 px-4 border-b">ACABADO</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10411274</td>
-                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
-                                        <td class="py-2 px-4 border-b border-r">8-10 m²</td>
-                                        <td class="py-2 px-4 border-b">Mate</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10411273</td>
-                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">35-40 m²</td>
-                                        <td class="py-2 px-4 border-b">Mate</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10411272</td>
-                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">175-200 m²</td>
-                                        <td class="py-2 px-4 border-b">Mate</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <!-- Características adicionales -->
-                        <div class="flex flex-wrap gap-2 mt-6">
-                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Bajo olor</span>
-                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Lavable</span>
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Ecológica</span>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Secado rápido</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Puedes agregar más productos con el mismo formato -->
-            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
-                <div class="p-6 flex flex-col md:flex-row">
-                    <!-- Columna izquierda -->
-                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-                        <div class="category-tag viniltex-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">PROFESIONAL</div>
-                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Viniltex Satinado" class="w-auto max-h-72 object-contain product-shadow">
-                        <div class="rating mt-4 text-amber-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Columna derecha -->
-                    <div class="md:w-2/3 md:pl-8">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">VINILTEX SATINADO</h3>
-                        <p class="text-gray-600 mb-6">
-                            Pintura vinil-acrílica con acabado satinado que proporciona un sutil brillo y elegancia. 
-                            Ofrece excelente resistencia a manchas y lavabilidad superior. Ideal para espacios 
-                            que requieren limpieza frecuente como cocinas, pasillos y áreas de alto tráfico.
-                        </p>
-                        
-                        <!-- Tabla de especificaciones técnicas -->
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
-                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
-                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
-                                        <th class="py-2 px-4 border-b">ACABADO</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10521354</td>
-                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
-                                        <td class="py-2 px-4 border-b border-r">8-10 m²</td>
-                                        <td class="py-2 px-4 border-b">Satinado</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10521355</td>
-                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">32-38 m²</td>
-                                        <td class="py-2 px-4 border-b">Satinado</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">10521356</td>
-                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">160-190 m²</td>
-                                        <td class="py-2 px-4 border-b">Satinado</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <!-- Características adicionales -->
-                        <div class="flex flex-wrap gap-2 mt-6">
-                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Alta resistencia</span>
-                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">Anti-manchas</span>
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Bajo VOC</span>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Fácil aplicación</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Separador -->
-        <div class="h-0.5 bg-gradient-to-r from-transparent via-white to-transparent my-12 opacity-30"></div>
-
-        <!-- KORAZA Section - también con el nuevo formato -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
-                    <span class="text-purple-400 mr-4">🛡️</span>
-                    KORAZA
-                </h2>
-                <p class="text-white text-lg opacity-80">Pintura anticorrosiva de máxima protección</p>
-            </div>
-            
-            <!-- Producto con especificaciones técnicas -->
-            <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
-                <div class="p-6 flex flex-col md:flex-row">
-                    <!-- Columna izquierda -->
-                    <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
-                        <div class="category-tag koraza-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">INDUSTRIAL</div>
-                        <img src="images/productos/viniltex/viniltex-advanced-mate-1_4GL-COL-2024-web.png" alt="Koraza Exteriores" class="w-auto max-h-72 object-contain product-shadow">
-                        <div class="rating mt-4 text-amber-400 flex">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Columna derecha -->
-                    <div class="md:w-2/3 md:pl-8">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">KORAZA EXTERIOR</h3>
-                        <p class="text-gray-600 mb-6">
-                            Pintura acrílica 100% para exteriores con protección avanzada contra rayos UV, 
-                            lluvia y condiciones climáticas extremas. Su formulación ofrece máxima durabilidad, 
-                            impermeabilidad y resistencia a hongos y algas. Ideal para fachadas, muros exteriores 
-                            y superficies expuestas a la intemperie.
-                        </p>
-                        
-                        <!-- Tabla de especificaciones técnicas -->
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full bg-white border border-gray-200">
-                                <thead>
-                                    <tr class="bg-gray-100">
-                                        <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
-                                        <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
-                                        <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
-                                        <th class="py-2 px-4 border-b">DURACIÓN</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">23567891</td>
-                                        <td class="py-2 px-4 border-b border-r">1/4 Galón (946 ml)</td>
-                                        <td class="py-2 px-4 border-b border-r">6-8 m²</td>
-                                        <td class="py-2 px-4 border-b">5 años</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">23567892</td>
-                                        <td class="py-2 px-4 border-b border-r">Galón (3.78 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">25-30 m²</td>
-                                        <td class="py-2 px-4 border-b">5 años</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="py-2 px-4 border-b border-r">23567893</td>
-                                        <td class="py-2 px-4 border-b border-r">5 Galones (18.9 L)</td>
-                                        <td class="py-2 px-4 border-b border-r">125-150 m²</td>
-                                        <td class="py-2 px-4 border-b">5 años</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <!-- Características adicionales -->
-                        <div class="flex flex-wrap gap-2 mt-6">
-                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">Anti-hongos</span>
-                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">Protección UV</span>
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Impermeable</span>
-                            <span class="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium">Máxima durabilidad</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Puedes continuar añadiendo las demás secciones con el mismo formato -->
-
         <!-- Footer -->
         <div class="text-center py-8 border-t border-white border-opacity-20">
             <h3 class="text-white text-2xl font-bold mb-4">Ferreinox</h3>
@@ -277,5 +98,270 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para cargar datos del CSV y mostrar productos -->
+    <script>
+        // Variable global para almacenar todos los productos
+        let allProducts = [];
+        let currentCategory = 'todos';
+
+        // Función para cargar el archivo CSV
+        function loadProductData() {
+            // Ruta al archivo CSV en GitHub
+            const csvFilePath = 'datos_productos.csv';
+            
+            fetch(csvFilePath)
+                .then(response => response.text())
+                .then(csvData => {
+                    // Parseamos el CSV
+                    const results = Papa.parse(csvData, {
+                        header: true,
+                        skipEmptyLines: true
+                    });
+                    
+                    // Almacenar todos los productos
+                    allProducts = results.data;
+                    
+                    // Mostrar todos los productos inicialmente
+                    displayProducts(allProducts);
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos:', error);
+                    document.getElementById('productsContainer').innerHTML = `
+                        <div class="text-white text-center py-10">
+                            <i class="fas fa-exclamation-triangle text-4xl"></i>
+                            <p class="mt-4">Error al cargar los productos. Por favor, intenta de nuevo más tarde.</p>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Función para mostrar productos filtrados
+        function displayProducts(products) {
+            const container = document.getElementById('productsContainer');
+            
+            // Si no hay productos para mostrar
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="text-white text-center py-10">
+                        <i class="fas fa-search text-4xl"></i>
+                        <p class="mt-4">No se encontraron productos en esta categoría.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Agrupar productos por subcategoría
+            const productsBySubcategory = {};
+            
+            products.forEach(product => {
+                const subcat = product.subcategoria || 'otros';
+                if (!productsBySubcategory[subcat]) {
+                    productsBySubcategory[subcat] = [];
+                }
+                productsBySubcategory[subcat].push(product);
+            });
+            
+            // Construir el HTML para cada subcategoría
+            let html = '';
+            
+            Object.keys(productsBySubcategory).forEach(subcategory => {
+                const subcategoryProducts = productsBySubcategory[subcategory];
+                
+                // Título de la subcategoría
+                html += `
+                <div class="mb-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-white text-4xl font-bold mb-4 flex items-center justify-center">
+                            <span class="text-${getCategoryColor(subcategory)}-400 mr-4">${getCategoryIcon(subcategory)}</span>
+                            ${subcategory.toUpperCase()}
+                        </h2>
+                        <p class="text-white text-lg opacity-80">${getCategoryDescription(subcategory)}</p>
+                    </div>
+                    
+                    <div class="space-y-10">
+                `;
+                
+                // Productos de esta subcategoría
+                subcategoryProducts.forEach(product => {
+                    // Separamos las características en un array
+                    const caracteristicas = product.caracteristicas ? product.caracteristicas.split(',') : [];
+                    
+                    html += `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-xl mb-10 transform transition-all hover:scale-[1.01]">
+                        <div class="p-6 flex flex-col md:flex-row">
+                            <!-- Columna izquierda: Imagen y clasificación -->
+                            <div class="md:w-1/3 mb-6 md:mb-0 flex flex-col items-center">
+                                <div class="category-tag ${subcategory}-bg text-white text-sm font-bold uppercase rounded-full px-4 py-1 mb-4">
+                                    ${getProductLevel(product.nombre)}
+                                </div>
+                                <img src="images/productos/${product.subcategoria}/${product.imagen}" 
+                                     alt="${product.nombre}" 
+                                     class="w-auto max-h-72 object-contain product-shadow">
+                                <div class="rating mt-4 text-amber-400 flex">
+                                    ${getRatingStars(product.nombre)}
+                                </div>
+                            </div>
+                            
+                            <!-- Columna derecha: Descripción y especificaciones -->
+                            <div class="md:w-2/3 md:pl-8">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-4">${product.nombre}</h3>
+                                <p class="text-gray-600 mb-6">${product.descripcion}</p>
+                                
+                                <!-- Tabla de especificaciones técnicas -->
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white border border-gray-200">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="py-2 px-4 border-b border-r">CÓDIGO</th>
+                                                <th class="py-2 px-4 border-b border-r">PRESENTACIÓN</th>
+                                                <th class="py-2 px-4 border-b border-r">RENDIMIENTO</th>
+                                                <th class="py-2 px-4 border-b">ACABADO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="py-2 px-4 border-b border-r">${product.codigo}</td>
+                                                <td class="py-2 px-4 border-b border-r">${product.presentacion}</td>
+                                                <td class="py-2 px-4 border-b border-r">${product.rendimiento}</td>
+                                                <td class="py-2 px-4 border-b">${product.acabado}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Características adicionales -->
+                                <div class="flex flex-wrap gap-2 mt-6">
+                                    ${caracteristicas.map((caracteristica, index) => {
+                                        const colors = ['red', 'orange', 'green', 'blue', 'purple', 'teal'];
+                                        const color = colors[index % colors.length];
+                                        return `<span class="bg-${color}-100 text-${color}-800 px-3 py-1 rounded-full text-sm font-medium">${caracteristica.trim()}</span>`;
+                                    }).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                html += `
+                    </div>
+                </div>
+                
+                <!-- Separador -->
+                <div class="h-0.5 bg-gradient-to-r from-transparent via-white to-transparent my-12 opacity-30"></div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Función para filtrar productos por categoría
+        function filterProducts(category) {
+            currentCategory = category;
+            
+            // Actualizar clases del menú para mostrar qué está activo
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector(`button[onclick="filterProducts('${category}')"]`).classList.add('active');
+            
+            // Si queremos mostrar todos los productos
+            if (category === 'todos') {
+                displayProducts(allProducts);
+                return;
+            }
+            
+            // Filtrar por categoría
+            const filteredProducts = allProducts.filter(product => product.categoria === category);
+            displayProducts(filteredProducts);
+        }
+
+        // Función para mostrar/ocultar el menú móvil
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Funciones auxiliares
+        function getCategoryColor(subcategory) {
+            const colors = {
+                'viniltex': 'red',
+                'koraza': 'purple',
+                'pintulux': 'cyan',
+                'herramientas': 'yellow',
+                'accesorios': 'green',
+                'default': 'blue'
+            };
+            return colors[subcategory.toLowerCase()] || colors.default;
+        }
+
+        function getCategoryIcon(subcategory) {
+            const icons = {
+                'viniltex': '🎨',
+                'koraza': '🛡️',
+                'pintulux': '💎',
+                'herramientas': '🔧',
+                'accesorios': '🧰',
+                'default': '📦'
+            };
+            return icons[subcategory.toLowerCase()] || icons.default;
+        }
+
+        function getCategoryDescription(subcategory) {
+            const descriptions = {
+                'viniltex': 'Pintura vinílica de alta calidad para interiores',
+                'koraza': 'Pintura anticorrosiva de máxima protección',
+                'pintulux': 'Pintura de lujo con acabado premium',
+                'herramientas': 'Herramientas profesionales para todo tipo de trabajos',
+                'accesorios': 'Complementos y accesorios para pintura',
+                'default': 'Productos de calidad para tus proyectos'
+            };
+            return descriptions[subcategory.toLowerCase()] || descriptions.default;
+        }
+
+        function getProductLevel(productName) {
+            // Determinar nivel según nombre del producto (puedes ajustar esta lógica)
+            if (productName.includes('Advanced') || productName.includes('Premium')) {
+                return 'PREMIUM';
+            } else if (productName.includes('Pro') || productName.includes('Professional')) {
+                return 'PROFESIONAL';
+            } else if (productName.includes('Industrial')) {
+                return 'INDUSTRIAL';
+            }
+            return 'ESTÁNDAR';
+        }
+
+        function getRatingStars(productName) {
+            // Lógica simple para asignar estrellas (puedes ajustarla)
+            let stars = '';
+            let rating = 0;
+            
+            if (productName.includes('Advanced') || productName.includes('Premium')) {
+                rating = 5;
+            } else if (productName.includes('Pro')) {
+                rating = 4;
+            } else {
+                rating = 3;
+            }
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 === rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            return stars;
+        }
+
+        // Cargar datos al iniciar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductData();
+        });
+    </script>
 </body>
 </html>
