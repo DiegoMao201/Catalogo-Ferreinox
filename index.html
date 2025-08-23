@@ -3,103 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Productos - Ferreinox</title>
+    <title>Catálogo Ferreinox - Portfolio Profesional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-
-    <header class="site-header">
-        <h1>Catálogo de Productos Ferreinox</h1>
-        <p>Soluciones en Abrasivos y Ferretería</p>
+    <header class="catalog-header">
+        <h1 class="catalog-title">FERREINOX</h1>
+        <p class="catalog-subtitle">Catálogo Profesional de Productos</p>
     </header>
-
-    <main id="product-container" class="container">
-        <div class="loading-message">
-            <div class="spinner"></div>
-            <p>Cargando productos desde Abracol.xlsx...</p>
+    
+    <main id="productsContainer" class="catalog-container">
+        <div class="loading-placeholder">
+            Cargando productos desde el archivo Excel...
         </div>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2025 Ferreinox. Todos los derechos reservados.</p>
-    </footer>
-
     <script>
-        async function loadAndDisplayProducts() {
-            const container = document.getElementById('product-container');
-            const excelFilePath = 'Abracol.xlsx';
+        // Variable global para almacenar todos los productos
+        let allProducts = [];
 
+        async function loadProductData() {
+            const excelFilePath = 'Abracol.xlsx'; 
+            
             try {
-                // 1. Cargar el archivo Excel
                 const response = await fetch(excelFilePath);
                 if (!response.ok) {
-                    throw new Error(`No se pudo encontrar el archivo: ${response.statusText}`);
+                    throw new Error("No se pudo encontrar el archivo: " + response.statusText);
                 }
+                
                 const arrayBuffer = await response.arrayBuffer();
                 const workbook = XLSX.read(arrayBuffer, { type: 'array' });
                 const firstSheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[firstSheetName];
-                const allProducts = XLSX.utils.sheet_to_json(worksheet);
-
-                // 2. Agrupar productos por la columna 'FAMILIA'
-                const productsByFamily = {};
-                for (const product of allProducts) {
-                    const family = product.FAMILIA || 'Sin Familia';
-                    if (!productsByFamily[family]) {
-                        productsByFamily[family] = [];
-                    }
-                    productsByFamily[family].push(product);
-                }
-
-                // 3. Generar el HTML
-                let contentHTML = '';
-                for (const family in productsByFamily) {
-                    contentHTML += `
-                        <section class="family-group">
-                            <h2 class="family-title">${family}</h2>
-                            <div class="table-wrapper">
-                                <table class="product-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Referencia</th>
-                                            <th>Nombre Comercial</th>
-                                            <th>Grano/Presentación</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                    `;
-                    
-                    // Añadir una fila por cada producto en la familia
-                    productsByFamily[family].forEach(product => {
-                        contentHTML += `
-                            <tr>
-                                <td data-label="Referencia">${product['REFERENCIA ICG']}</td>
-                                <td data-label="Nombre">${product['NOMBRE COMERCIAL']}</td>
-                                <td data-label="Grano">${product['Grano/Presentacion']}</td>
-                            </tr>
-                        `;
-                    });
-
-                    contentHTML += `
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-                    `;
-                }
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
                 
-                // 4. Mostrar los productos en la página
-                container.innerHTML = contentHTML;
+                allProducts = jsonData;
+                console.log("Productos cargados desde Excel:", allProducts);
+                
+                displayProducts(allProducts);
 
             } catch (error) {
-                console.error('Error al cargar los productos:', error);
-                container.innerHTML = `<div class="error-message">Error al cargar productos. Asegúrate de que el archivo 'Abracol.xlsx' exista y tenga el formato correcto.</div>`;
+                console.error('Error al cargar el archivo Excel:', error);
+                const container = document.getElementById('productsContainer');
+                container.innerHTML = `<div class="error-placeholder">Error al cargar productos. Asegúrate de que 'Abracol.xlsx' exista y tenga el formato correcto.</div>`;
             }
         }
+        
+        function getRatingStars(productName) {
+            let rating = 4;
+            if (!productName) return '☆'.repeat(5);
 
-        // Ejecutar la función cuando la página se haya cargado
-        document.addEventListener('DOMContentLoaded', loadAndDisplayProducts);
+            const lowerCaseName = productName.toLowerCase();
+            
+            if (lowerCaseName.includes('premium') || lowerCaseName.includes('abracol')) {
+                rating = 5;
+            } else if (lowerCaseName.includes('pro')) {
+                rating = 4;
+            } else {
+                rating = 3;
+            }
+            
+            return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('productsContainer');
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = `<div class="error-placeholder">No se encontraron productos en el archivo.</div>`;
+                return;
+            }
+            
+            let html = '';
+            
+            products.forEach(product => {
+                // ----- CORRECCIÓN IMPORTANTE -----
+                // Aquí usamos los nombres exactos de las columnas de tu Excel
+                const nombre = product['NOMBRE COMERCIAL'] || 'Producto';
+                const categoria = product.categoria || 'General'; // Aún necesitas esta columna en el Excel
+                const descripcion = product.Descripcion || 'Descripción no disponible.';
+                const subcategoria = product.FAMILIA || 'N/A';
+                const imagen = product.imagen || ''; // Y esta también
+                const codigo = product['REFERENCIA ICG'] || 'N/A';
+                const presentacion = product['Grano/Presentacion'] || 'N/A';
+                // ----- FIN DE LA CORRECCIÓN -----
+
+                html += `
+                <div class="product-card">
+                    <div class="product-top-section">
+                        <div class="image-container">
+                            <img src="images/productos/${subcategoria}/${imagen}" 
+                                 alt="${nombre}" 
+                                 class="product-image"
+                                 onerror="this.src='https://via.placeholder.com/150x150?text=Ferreinox'">
+                        </div>
+                        <div class="content-container">
+                            <div class="product-title">${nombre.toUpperCase()}</div>
+                            <div class="product-info">
+                                <span class="product-segment">${categoria.toUpperCase()}</span>
+                                <span class="product-rating">${getRatingStars(nombre)}</span>
+                            </div>
+                            <div class="product-description">
+                                ${descripcion}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="specifications-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>REFERENCIA</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>GRANO</th>
+                                    <th>FAMILIA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${codigo}</td>
+                                    <td>${nombre}</td>
+                                    <td>${presentacion}</td>
+                                    <td>${subcategoria}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Cargar datos al iniciar la página
+        document.addEventListener('DOMContentLoaded', loadProductData);
     </script>
 </body>
 </html>
